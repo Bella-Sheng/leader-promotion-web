@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组长晋升评审小程序</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">晋升评审</p>
+          <h1>组长晋升小程序</h1>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel">
+          <div class="section-title">
+            <h2>1. 参评人员</h2>
+          </div>
+
+          <div class="inline-form" id="person-form">
+            <input
+              id="person-name"
+              type="text"
+              placeholder="请输入人员姓名"
+              maxlength="20"
+            />
+            <button type="button" class="primary" id="add-person-btn">添加人员</button>
+          </div>
+
+          <ul id="person-list" class="chip-list"></ul>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">
+            <h2>2. 工作能力维度</h2>
+          </div>
+
+          <div class="inline-form" id="dimension-form">
+            <input
+              id="dimension-name"
+              type="text"
+              placeholder="自定义维度名称"
+              maxlength="20"
+            />
+            <button type="button" class="secondary" id="add-dimension-btn">新增维度</button>
+          </div>
+
+          <ul id="dimension-list" class="dimension-list"></ul>
+        </section>
+      </main>
+
+      <section class="panel summary-panel">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span>参评人数</span>
+            <strong id="stat-person-count">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>维度数量</span>
+            <strong id="stat-dimension-count">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>最高总分</span>
+            <strong id="stat-max-score">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>平均分</span>
+            <strong id="stat-average-score">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>3. 评审打分</h2>
+          <span class="hint">所有能力合计 100 分</span>
+        </div>
+
+        <div class="table-wrap">
+          <table id="score-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>4. 晋升结果</h2>
+        </div>
+        <div id="result-list" class="result-list"></div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
