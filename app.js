@@ -3,7 +3,7 @@ const STORAGE_KEY = 'leader-promotion-review-v5';
 const DEFAULT_DIMENSIONS = [
   '团队管理能力',
   '沟通协调能力',
-  '技术执行能力',
+  '技术能力',
   '问题解决能力',
   '责任心与担当'
 ];
@@ -298,20 +298,7 @@ function createId() {
 }
 
 function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-    if (saved && Array.isArray(saved.people) && Array.isArray(saved.dimensions)) {
-      return {
-        ...saved,
-        people: saved.people.map((person) => ({
-          ...person,
-          name: person.name === '张三' ? '郝营' : person.name === '李四' ? '何贵宝' : person.name
-        }))
-      };
-    }
-  } catch (error) {
-    console.warn('Failed to load saved state:', error);
-  }
+  localStorage.removeItem(STORAGE_KEY);
 
   const dimensions = DEFAULT_DIMENSIONS.map((name, index) => ({
       id: createId() + index,
@@ -343,7 +330,6 @@ function saveState() {
     });
   });
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
 function escapeHtml(value) {
