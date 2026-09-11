@@ -3,7 +3,7 @@ const STORAGE_KEY = 'leader-promotion-review-v5';
 const DEFAULT_DIMENSIONS = [
   '团队管理能力',
   '沟通协调能力',
-  '业务执行能力',
+  '技术执行能力',
   '问题解决能力',
   '责任心与担当'
 ];
@@ -301,7 +301,13 @@ function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
     if (saved && Array.isArray(saved.people) && Array.isArray(saved.dimensions)) {
-      return saved;
+      return {
+        ...saved,
+        people: saved.people.map((person) => ({
+          ...person,
+          name: person.name === '张三' ? '郝营' : person.name === '李四' ? '何贵宝' : person.name
+        }))
+      };
     }
   } catch (error) {
     console.warn('Failed to load saved state:', error);
@@ -315,8 +321,8 @@ function loadState() {
 
   return {
     people: [
-      { id: createId(), name: '张三', scores: generateDefaultScores(dimensions) },
-      { id: createId(), name: '李四', scores: generateDefaultScores(dimensions) }
+      { id: createId(), name: '郝营', scores: generateDefaultScores(dimensions) },
+      { id: createId(), name: '何贵宝', scores: generateDefaultScores(dimensions) }
     ],
     dimensions
   };
@@ -352,8 +358,8 @@ function escapeHtml(value) {
 window.addEventListener('DOMContentLoaded', () => {
   if (!state.people.length) {
     state.people = [
-      { id: createId(), name: '张三', scores: generateDefaultScores(state.dimensions) },
-      { id: createId(), name: '李四', scores: generateDefaultScores(state.dimensions) }
+      { id: createId(), name: '郝营', scores: generateDefaultScores(state.dimensions) },
+      { id: createId(), name: '何贵宝', scores: generateDefaultScores(state.dimensions) }
     ];
   }
 
